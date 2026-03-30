@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -12,7 +14,7 @@ class Property(models.Model):
     location = models.CharField(max_length=200)
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
-    image = models.ImageField(upload_to='properties/')
+    image = CloudinaryField('image', blank=True, null=True)  # <-- CloudinaryField instead of ImageField
     listed_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
